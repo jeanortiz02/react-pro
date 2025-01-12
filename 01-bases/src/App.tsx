@@ -2,7 +2,8 @@ import { Counter } from './bases/Counter';
 import { CounterBy } from './bases/CounterBy';
 import { CounterEffects } from './bases/CounterEffects';
 import { CounterHook } from './bases/CounterHook';
-import { CounterReducerComponent } from './bases/CounterReducer';
+// import { CounterReducerComponent } from './bases/CounterReducer';
+import { CounterReducerComponent } from './counter-reducer/CounterReducer';
 import './index.css';
 
 function App() {
