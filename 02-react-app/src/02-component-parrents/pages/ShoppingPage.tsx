@@ -1,61 +1,15 @@
-import { useState } from "react";
 import { ProductButton, ProductCard, ProductImage, ProductTitle } from "../components"
-import { Product } from "../interface/interfaces";
 import '../styles/custom-style.css';
+import { products } from "../data/product";
+import { useShoppingCart } from "../hooks/useShoppingCart";
 
-
-const product = {
-  id: '1',
-  title: "Coffe Mug - Card",
-  image: "./coffee-mug.png"
-}
-const product2 = {
-  id: '2',
-  title: "Coffe Mug - Meme",
-  image: "./coffee-mug2.png"
-}
-
-const products : Product[] = [ product, product2 ];
-
-interface ProductInCart extends Product {
-  count: number;
-}
 
 // Other options interface in useState
 // type cart = {[key: string] : ProductInCart};
 
 export const ShoppingPage = () => {
-
-
-  const [shoppingCart, setShoppingCart] = useState<{ [key: string] : ProductInCart }>({});
-
-  const onProductCountChange = ({count, product} : {count: number, product: Product}) => {
-    
-    setShoppingCart(oldShoppingCart => {
-
-        const productInCart : ProductInCart = oldShoppingCart[product.id] || { ...product, count: 0 };
-
-        if( Math.max(productInCart.count + count, 0) > 0) {
-
-          productInCart.count += count;
-
-          return {
-            ...oldShoppingCart,
-            [product.id] : productInCart
-          }
-
-        }
-        
-        const { [product.id]: toDelete, ...rest } = oldShoppingCart;
-        return {rest}
-      // }
-
-      // return {
-      //   ...oldShoppingCart,
-      //   [product.id] : {...product, count}
-      // }
-    })
-  }
+          const {shoppingCart, onProductCountChange} = useShoppingCart()
+  
 
   return (
     <div>
@@ -93,6 +47,7 @@ export const ShoppingPage = () => {
 
             {
               Object.entries(shoppingCart).map(([key, product]) => (
+                
                 <ProductCard
                   key={key}
                   product={product}
@@ -117,5 +72,4 @@ export const ShoppingPage = () => {
 
         </div>
     </div>
-  )
-}
+  )}
