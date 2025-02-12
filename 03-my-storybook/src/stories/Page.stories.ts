@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
 
-import { Page } from './Page';
+import { Page, type User } from './Page';
 
-const meta = {
+const meta: Meta<User> = {
   title: 'Example/Page',
   component: Page,
   parameters: {
